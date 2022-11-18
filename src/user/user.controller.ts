@@ -14,7 +14,7 @@ interface LoginDto{
     password: string,
 }
 
-@Controller("user")
+@Controller("account") // rota alterada para o padrão solicitado
 export class UserController {
     constructor(private userService: UserService) {}
 
