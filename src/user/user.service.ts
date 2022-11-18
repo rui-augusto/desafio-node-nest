@@ -24,7 +24,7 @@ export class UserService {
   async create(user: UserInterface): Promise<any> {
     const data = await this.findAll();
     // colocar low case no fn e ln /////////////////////////////////
-    user.email = `${user.firstName}.${user.lastName}@dreamlabs.com`;
+    user.email = `${user.firstName.toLowerCase()}.${user.lastName.toLowerCase()}@dreamlabs.com`;
     // verifica se já existe algum dado cadastrado
     if (data.length == 0){
       return this.usersRepository.save(this.usersRepository.create(user));
