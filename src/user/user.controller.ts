@@ -1,5 +1,4 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Req } from '@nestjs/common';
-import { Request } from "express";
 import { UserService } from './user.service';
 
 interface UserDto{
