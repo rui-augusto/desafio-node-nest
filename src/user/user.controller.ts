@@ -31,7 +31,6 @@ export class UserController {
     @Post("login")
     async login(@Body() loginUserDto: LoginDto){
         const user = await this.userService.login(loginUserDto);
-        
         if (user){
             return "successful login!";
         }
@@ -45,19 +44,24 @@ export class UserController {
         if (!user){
             return "error: data is invalid";
         }
-        return "data of user created successfully!";
+        return "user registered";
     }
 
     @Put(":id")
     async update(@Param('id') id: number, @Body() body: any) {
         const updatedUser: any = await this.userService.update(id, body);
         console.log(updatedUser);
-        return "user updated!";
+        return `user ${id} updated`;
     }
 
     @Delete("remove/:id")
-    remove(@Param('id') id: number) {
-        return this.userService.remove(id)
+    async remove(@Param('id') id: number) {
+        const user = await this.userService.findOne(id);
+        await this.userService.remove(id);
+        if (!user) {
+            return "error: verify the id number and try again";
+        }
+        return `user ${id} removed`;
     }
 
 }
