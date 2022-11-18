@@ -2,7 +2,7 @@ import { DataSource } from 'typeorm';
 
 export const databaseProviders = [
   {
-    provide: 'DATA_SOURCE',
+    provide: 'DB_CONNECTION',
     useFactory: async () => {
       const dataSource = new DataSource({
         type: 'mysql',

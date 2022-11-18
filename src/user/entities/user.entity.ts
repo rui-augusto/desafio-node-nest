@@ -14,7 +14,7 @@ export class User {
     @Column( {width: 12})
     password: string;
 
-    @Column({default: ""})
+    @Column()
     email: string;
 
     @Column({ default: true })
