@@ -1,21 +1,11 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Req } from '@nestjs/common';
+import { CreateUserDto } from "./dto/create-user.dto";
+import { LoginUserDto } from "./dto/login-user.dto";
 import { ApiProperty } from '@nestjs/swagger';
 import { UserService } from './user.service';
 
 // modularizar Dto
 // https://docs.nestjs.com/openapi/types-and-parameters 
-
-interface UserDto{
-    firstName: string,
-    lastName: string,
-    password: string,
-    email: string,
-}
-
-interface LoginDto{
-    email: string,
-    password: string,
-}
 
 @Controller("account") // rota alterada para o padrão solicitado
 export class UserController {
@@ -32,7 +22,7 @@ export class UserController {
     }
 
     @Post("login")
-    async login(@Body() loginUserDto: LoginDto){
+    async login(@Body() loginUserDto: LoginUserDto){
         const user = await this.userService.login(loginUserDto);
         if (user){
             return "successful login!";
@@ -41,7 +31,7 @@ export class UserController {
     }
 
     @Post("register")
-    async create(@Body() createUserDto: UserDto){
+    async create(@Body() createUserDto: CreateUserDto){
         const user = await this.userService.create(createUserDto);
         console.log(user);
         if (!user){
