@@ -1,5 +1,9 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Req } from '@nestjs/common';
+import { ApiProperty } from '@nestjs/swagger';
 import { UserService } from './user.service';
+
+// modularizar Dto
+// https://docs.nestjs.com/openapi/types-and-parameters 
 
 interface UserDto{
     firstName: string,
