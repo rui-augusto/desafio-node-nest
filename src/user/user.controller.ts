@@ -10,7 +10,7 @@ export class UserController {
 
     // FIND ALL USERS
     @ApiOperation( {summary: 'Listar todos os usuários'} )
-    @ApiResponse( {status: 201, description: 'Lista de usuários retornada com sucesso'} )
+    @ApiResponse( {status: 200, description: 'Lista de usuários retornada com sucesso'} )
     @Get()
     async index() {
         return await this.userService.findAll();
@@ -41,7 +41,8 @@ export class UserController {
 
     //REGISTER NEW USER
     @ApiOperation( {summary: 'Registrar um novo usuário'} )
-    @ApiResponse( {status: 200, description: 'Usuário registrado com sucesso'} )
+    @ApiResponse( {status: 201, description: 'Usuário registrado com sucesso'} )
+    @ApiResponse({ status: 400, description: 'Usuário não põde ser registrado' })
     @Post("register")
     async create(@Body() createUserDto: CreateUserDto){
         const user = await this.userService.create(createUserDto);

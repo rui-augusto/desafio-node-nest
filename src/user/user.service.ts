@@ -1,18 +1,9 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
-
-export interface UserInterface{
-    firstName: string,
-    lastName: string,
-    password: string,
-    email: string,
-}
-
-export interface LoginInterface{
-  email: string,
-  password: string,
-}
+import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
+import { LoginUserDto } from "./dto/login-user.dto";
 
 @Injectable()
 export class UserService {
@@ -21,17 +12,15 @@ export class UserService {
     private usersRepository: Repository<User>,
   ) {}
 
-  async create(user: UserInterface): Promise<any> {
+  async create(user: CreateUserDto): Promise<any> {
     const data = await this.findAll();
-    // colocar low case no fn e ln /////////////////////////////////
     user.email = `${user.firstName.toLowerCase()}.${user.lastName.toLowerCase()}@dreamlabs.com`;
-    // verifica se já existe algum dado cadastrado
+    // verify if exists a register
     if (data.length == 0){
       return this.usersRepository.save(this.usersRepository.create(user));
     }
+    // validate an register
     for(let i = 0; i < data.length; i++){
-      const a = user.firstName == data[i].firstName && user.lastName == data[i].lastName && user.password == data[i].password;
-      console.log(a);
       if(user.firstName == data[i].firstName && user.lastName == data[i].lastName){
         return false;
       }
@@ -39,17 +28,17 @@ export class UserService {
     }
   }
 
-  async login(user: LoginInterface): Promise<any> {
+  async login(user: LoginUserDto): Promise<any> {
     const data = await this.findAll();
     for(let i = 0; i < data.length; i++){
-      if(user.email == data[i].email && user.password == data[i].password){
+      if(user.email == data[i].email && user.password == data[i].password && user.isValid){
         return true;
       }
       return false;
     }
   }
 
-  async update(id: number, user: UserInterface) {
+  async update(id: number, user: UpdateUserDto) {
     const updatedUser = await this.findOne(id);
     this.usersRepository.merge(updatedUser, user);
     return await this.usersRepository.save(updatedUser);
