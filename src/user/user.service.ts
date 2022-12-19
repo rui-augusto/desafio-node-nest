@@ -31,7 +31,7 @@ export class UserService {
   async login(user: LoginUserDto): Promise<any> {
     const data = await this.findAll();
     for(let i = 0; i < data.length; i++){
-      if(user.email == data[i].email && user.password == data[i].password && user.isValid){
+      if(user.email == data[i].email && user.password == data[i].password && user.isActive){
         return true;
       }
       return false;

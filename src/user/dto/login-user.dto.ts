@@ -7,5 +7,5 @@ export class LoginUserDto {
     @ApiProperty()
     password: string;
 
-    isValid: boolean;
+    isActive: boolean;
 }
