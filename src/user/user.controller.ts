@@ -50,7 +50,7 @@ export class UserController {
         if (!user){
             return `error: ${ user.email } is already used`;
         }
-        return `${ user.email } registered`;
+        return `${user.email} registered`;
     }
 
     // UPDATE USER
