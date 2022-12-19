@@ -21,7 +21,7 @@ export class UserController {
     @ApiResponse( {status: 200, description: 'Dados de um usuário retornados com sucesso'} )
     @ApiResponse( {status: 404, description: 'ID inválido!'} )
     @Get(":id")
-    async findOne(@Param('id') id: number) {
+    async findOne(@Param('id') id: string) {
         return await this.userService.findOne(id);
     }
 
@@ -48,9 +48,9 @@ export class UserController {
         const user = await this.userService.create(createUserDto);
         console.log(user);
         if (!user){
-            return "error: data is invalid";
+            return `error: ${ user.email } is already used`;
         }
-        return "user registered";
+        return `${ user.email } registered`;
     }
 
     // UPDATE USER
@@ -58,7 +58,7 @@ export class UserController {
     @ApiResponse({ status: 204, description: 'Usuário atualizado com sucesso' })
     @ApiResponse({ status: 404, description: 'ID de usuário não foi encontrado' })
     @Put(":id")
-    async update(@Param('id') id: number, @Body() body: any) {
+    async update(@Param('id') id: string, @Body() body: any) {
         const updatedUser: any = await this.userService.update(id, body);
         console.log(updatedUser);
         return `user ${id} updated`;
@@ -69,7 +69,7 @@ export class UserController {
     @ApiResponse({ status: 204, description: 'Usuário removido com sucesso' })
     @ApiResponse({ status: 404, description: 'ID de usuário não foi encontrado' })
     @Delete("remove/:id")
-    async remove(@Param('id') id: number) {
+    async remove(@Param('id') id: string) {
         const user = await this.userService.findOne(id);
         await this.userService.remove(id);
         if (!user) {

@@ -38,7 +38,7 @@ export class UserService {
     }
   }
 
-  async update(id: number, user: UpdateUserDto) {
+  async update(id: string, user: UpdateUserDto) {
     const updatedUser = await this.findOne(id);
     this.usersRepository.merge(updatedUser, user);
     return await this.usersRepository.save(updatedUser);
@@ -46,11 +46,11 @@ export class UserService {
 
 
   // new function for deleting an account
-  async delete(id: number) {
+  async delete(id: string) {
     return await this.usersRepository.delete(id);
   }
 
-  async findOne(id: number): Promise<User> {
+  async findOne(id: string): Promise<User> {
     try{
       return await this.usersRepository.findOneBy({ id });
     } catch (e) {
@@ -62,7 +62,7 @@ export class UserService {
     return this.usersRepository.find();
   }
 
-  async remove(id: number): Promise<void> {
+  async remove(id: string): Promise<void> {
       await this.usersRepository.delete(id);
   }
 }
