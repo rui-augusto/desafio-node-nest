@@ -28,7 +28,7 @@ export class UserService {
     }
   }
 
-  async login(user: LoginUserDto): Promise<any> {
+  async login(user: LoginUserDto): Promise<boolean> {
     const data = await this.findAll();
     for(let i = 0; i < data.length; i++){
       if(user.email == data[i].email && user.password == data[i].password && user.isActive){

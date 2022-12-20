@@ -1,21 +1,17 @@
 import { Module } from '@nestjs/common';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
 import { UserModule } from "./user/user.module";
 
 @Module({
   imports: [UserModule],
-  controllers: [],
-  providers: [],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}
 
 
 
-// TODO:
-
 // TODO: when a user is logging in,
 // TODO: confer if the account is active
-
-// TODO: create app.controller and app.service
-// TODO: create string return with:
-// * personal info
-// * project info
+// * create a new module called 'auth'
