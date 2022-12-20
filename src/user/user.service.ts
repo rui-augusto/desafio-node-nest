@@ -28,13 +28,15 @@ export class UserService {
     }
   }
 
-  async login(user: LoginUserDto): Promise<boolean> {
+  async login(user: LoginUserDto): Promise<string> {
     const data = await this.findAll();
     for(let i = 0; i < data.length; i++){
       if(user.email == data[i].email && user.password == data[i].password && user.isActive){
-        return true;
+        return "authenticated user";
+      } else if (!user.isActive) {
+        return "error: user account is not active."
       }
-      return false;
+      return "invalid email or password ";
     }
   }
 
