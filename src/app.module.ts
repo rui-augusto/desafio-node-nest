@@ -9,9 +9,3 @@ import { UserModule } from "./user/user.module";
   providers: [AppService],
 })
 export class AppModule {}
-
-
-
-// TODO: when a user is logging in,
-// TODO: confer if the account is active
-// * create a new module called 'auth'

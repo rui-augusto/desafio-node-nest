@@ -19,4 +19,16 @@ export class User {
 
     @Column({ default: true })
     isActive: boolean;
+
+    // * adding a constructor to use in tests files
+    constructor(user?: Partial<User>) {
+        this.id = user?.id;
+        this.firstName = user?.firstName;
+        this.lastName = user?.lastName;
+        this.password = user?.password;
+        this.email = user?.email;
+        this.isActive = user?.isActive;
+
+    }
+
 }
