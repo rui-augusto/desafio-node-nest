@@ -46,4 +46,11 @@ describe ('UserController', () => {
         expect(userController).toBeDefined();
         expect(userService).toBeDefined();
     });
+
+    describe('findAll', () => {
+        it('should return a list of users', async () => {
+            const result = await userController.index();
+            expect(result).toEqual(UserList);
+        });
+     });
 });
