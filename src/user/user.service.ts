@@ -52,9 +52,9 @@ export class UserService {
     return await this.usersRepository.delete(id);
   }
 
-  async findOne(id: string): Promise<User> {
+  async findOne(email: string): Promise<User> {
     try{
-      return await this.usersRepository.findOneBy({ id });
+      return await this.usersRepository.findOneBy({ email });
     } catch (e) {
       throw new NotFoundException(e.message);
     }

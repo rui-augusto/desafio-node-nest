@@ -20,9 +20,9 @@ export class UserController {
     @ApiOperation({ summary: 'Exibir os dados de um usuário' })
     @ApiResponse({ status: 200, description: 'Dados de um usuário retornados com sucesso' })
     @ApiResponse({ status: 404, description: 'ID inválido!' })
-    @Get(":id")
-    async findOne(@Param('id') id: string) {
-        return await this.userService.findOne(id);
+    @Get(":email")
+    async findOne(@Param('email') email: string) {
+        return await this.userService.findOne(email);
     }
 
     // VALIDATE LOGIN
